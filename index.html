@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de OpenCode Skills</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #d2a8ff;
+      --code-bg: #1c2128;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a1e2e 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+
+    .section { margin-bottom: 4rem; }
+    .section h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section h3 {
+      font-size: 1.3rem;
+      color: var(--accent3);
+      margin: 1.5rem 0 0.7rem;
+    }
+    .section p { color: var(--text-muted); margin-bottom: 1rem; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h4 {
+      color: var(--accent2);
+      margin-bottom: 0.5rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+    code {
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      color: var(--text);
+    }
+    .inline-code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.85em;
+    }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(88,166,255,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--surface);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    td { color: var(--text-muted); }
+
+    .step-list { counter-reset: steps; list-style: none; padding: 0; }
+    .step-list li {
+      counter-increment: steps;
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    .step-list li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .tip {
+      background: rgba(63,185,80,0.1);
+      border-left: 3px solid var(--accent2);
+      padding: 1rem 1.2rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      color: var(--text-muted);
+    }
+    .tip strong { color: var(--accent2); }
+
+    .warn {
+      background: rgba(210,153,34,0.1);
+      border-left: 3px solid #d29922;
+      padding: 1rem 1.2rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      color: var(--text-muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>OpenCode Skills</h1>
+  <p>Guia completa sobre como crear, instalar y usar Skills en OpenCode para potenciar tu agente de IA.</p>
+</div>
+
+<div class="container">
+
+  <!-- QUE SON LOS SKILLS -->
+  <div class="section">
+    <h2>Que son los Skills?</h2>
+    <p>Los <strong>Skills</strong> son conjuntos de instrucciones reutilizables que el agente de IA descubre y ejecuta automaticamente cuando detecta que son relevantes para la tarea. Piensa en ellos como "recetas especializadas" que le ensenan a OpenCode como manejar tareas especificas.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h4>Automáticos</h4>
+        <p>El agente carga el skill cuando la descripcion coincide con lo que el usuario pide. No necesitas invocar nada manualmente.</p>
+      </div>
+      <div class="card">
+        <h4>Reutilizables</h4>
+        <p>Crea una vez, usa en cualquier proyecto. Los skills globales estan disponibles en todas partes.</p>
+      </div>
+      <div class="card">
+        <h4>Estandar Abierto</h4>
+        <p>Creados por Anthropic, compatibles con Claude Code, OpenCode, Cursor, Copilot y 40+ herramientas mas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTRUCTURA -->
+  <div class="section">
+    <h2>Estructura de un Skill</h2>
+    <p>Un skill es una carpeta que contiene un archivo <code class="inline-code">SKILL.md</code>. Eso es todo. Sin compilacion, sin herramientas especiales.</p>
+
+    <pre><code>.opencode/
+  skills/
+    mi-skill/
+      SKILL.md          &lt;- Archivo principal (obligatorio)
+      referencia.md     &lt;- Archivos auxiliares (opcional)
+      script.sh         &lt;- Scripts (opcional)</code></pre>
+
+    <h3>El archivo SKILL.md</h3>
+    <p>Tiene dos partes: un frontmatter YAML con metadatos y el contenido con instrucciones para el agente.</p>
+
+    <pre><code>---
+name: test-generator
+description: Genera tests unitarios para archivos TypeScript. Usar cuando el usuario pida crear tests o cobertura de codigo.
+---
+
+# Generador de Tests
+
+## Pasos a seguir
+1. Lee el archivo fuente indicado
+2. Identifica las funciones exportadas
+3. Crea un archivo de test usando vitest
+4. Incluye casos edge y manejo de errores
+
+## Ejemplo de output
+Usa `describe()` y `it()` con nombres descriptivos.</code></pre>
+
+    <div class="tip">
+      <strong>Tip:</strong> El campo <code class="inline-code">description</code> es lo mas importante. Es la unica cosa que el agente lee al inicio para decidir si cargar el skill o no.
+    </div>
+  </div>
+
+  <!-- CAMPOS FRONTMATTER -->
+  <div class="section">
+    <h2>Campos del Frontmatter</h2>
+
+    <table>
+      <thead>
+        <tr><th>Campo</th><th>Requerido</th><th>Descripcion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="inline-code">name</code></td><td>Si</td><td>1-64 caracteres, minusculas con guiones. Debe coincidir con el nombre de la carpeta.</td></tr>
+        <tr><td><code class="inline-code">description</code></td><td>Si</td><td>1-1024 caracteres. Describe que hace Y cuando usarlo. Es el "gatillo" de activacion.</td></tr>
+        <tr><td><code class="inline-code">license</code></td><td>No</td><td>Licencia del skill (ej: MIT).</td></tr>
+        <tr><td><code class="inline-code">compatibility</code></td><td>No</td><td>Requisitos del entorno.</td></tr>
+        <tr><td><code class="inline-code">metadata</code></td><td>No</td><td>Pares clave-valor arbitrarios (autor, version, categoria).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- UBICACION -->
+  <div class="section">
+    <h2>Donde colocar los Skills</h2>
+    <p>OpenCode busca skills en varias ubicaciones, de menor a mayor alcance:</p>
+
+    <table>
+      <thead>
+        <tr><th>Ubicacion</th><th>Alcance</th><th>Uso recomendado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="inline-code">.opencode/skills/</code></td><td>Proyecto</td><td>Skills especificos del proyecto, compartidos via Git</td></tr>
+        <tr><td><code class="inline-code">.claude/skills/</code></td><td>Proyecto</td><td>Compatibilidad con Claude Code</td></tr>
+        <tr><td><code class="inline-code">.agents/skills/</code></td><td>Proyecto</td><td>Directorio alternativo</td></tr>
+        <tr><td><code class="inline-code">~/.config/opencode/skills/</code></td><td>Global</td><td>Skills personales usados en todos los proyectos</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip">
+      <strong>Tip:</strong> Los skills en <code class="inline-code">.opencode/skills/</code> se comparten con tu equipo via Git. Los globales en <code class="inline-code">~/.config/opencode/skills/</code> son solo para ti.
+    </div>
+  </div>
+
+  <!-- CREAR SKILL -->
+  <div class="section">
+    <h2>Como crear tu primer Skill</h2>
+    <ol class="step-list">
+      <li>
+        <strong>Crea la carpeta</strong><br>
+        <code class="inline-code">mkdir -p .opencode/skills/test-generator</code>
+      </li>
+      <li>
+        <strong>Crea el archivo SKILL.md</strong><br>
+        Escribe el frontmatter con <code class="inline-code">name</code> y <code class="inline-code">description</code>, luego las instrucciones para el agente.
+      </li>
+      <li>
+        <strong>Reinicia OpenCode</strong><br>
+        Los skills se cargan al inicio. Usa <code class="inline-code">/new</code> o reinicia la sesion.
+      </li>
+      <li>
+        <strong>Prueba!</strong><br>
+        Simplemente escribe algo como "genera tests para src/auth.ts" y el agente cargara el skill automaticamente.
+      </li>
+    </ol>
+  </div>
+
+  <!-- EJEMPLO PRACTICO -->
+  <div class="section">
+    <h2>Ejemplo Practico: Skill de Revision de Seguridad</h2>
+    <pre><code>---
+name: security-review
+description: Revisa codigo en busca de vulnerabilidades de seguridad OWASP. Usar cuando el usuario pida revisar seguridad, auditar modulo o detectar fallas.
+---
+
+# Revision de Seguridad
+
+## Protocolo
+1. Identifica puntos de entrada de datos del usuario
+2. Busca inyecciones SQL, XSS, CSRF
+3. Revisa autenticacion y autorizacion
+4. Verifica que secrets no esten hardcodeados
+5. Emite reporte con severidad (critico/alto/medio/bajo)
+
+## Reglas
+- Nunca omitas archivos por "parecer seguros"
+- Prioriza datos criticos y endpoints publicos
+- Incluye el archivo y linea exacta de cada hallazgo</code></pre>
+  </div>
+
+  <!-- COMO FUNCIONA POR DENTRO -->
+  <div class="section">
+    <h2>Como funciona por dentro</h2>
+
+    <div class="card">
+      <h4>Nivel 1: Metadata (siempre en memoria)</h4>
+      <p>Al iniciar, OpenCode carga solo <code class="inline-code">name</code> y <code class="inline-code">description</code> de cada skill. ~100 tokens por skill. Con 50 skills, solo 5,000 tokens.</p>
+    </div>
+    <div class="card">
+      <h4>Nivel 2: Instrucciones (bajo demanda)</h4>
+      <p>Cuando el agente decide que un skill es relevante, lee el contenido completo del <code class="inline-code">SKILL.md</code>. Recomendado: menos de 500 lineas.</p>
+    </div>
+    <div class="card">
+      <h4>Nivel 3: Recursos (bajo demanda)</h4>
+      <p>Si el <code class="inline-code">SKILL.md</code> referencia archivos adicionales, el agente los carga solo cuando los necesita.</p>
+    </div>
+  </div>
+
+  <!-- INSTALAR SKILLS EXISTENTES -->
+  <div class="section">
+    <h2>Instalar Skills existentes</h2>
+    <p>Usa el CLI <code class="inline-code">npx skills</code> para instalar skills de la comunidad:</p>
+
+    <pre><code># Cloudflare Workers, AI, KV, R2, D1
+npx skills add https://github.com/cloudflare/skills
+
+# AI models via Replicate
+npx skills add replicate/skills
+
+# UI/UX design patterns de Anthropic
+npx skills add https://github.com/anthropics/skills --skill frontend-design
+
+# Creador de skills (para hacer tus propios skills)
+npx skills add https://github.com/anthropics/skills --skill skill-creator</code></pre>
+
+    <div class="warn">
+      Despues de instalar, reinicia OpenCode para que cargue los nuevos skills.
+    </div>
+  </div>
+
+  <!-- PERMISOS -->
+  <div class="section">
+    <h2>Permisos de Skills</h2>
+    <p>Puedes controlar que skills puede usar cada agente en <code class="inline-code">opencode.json</code>:</p>
+
+    <pre><code>{
+  "permission": {
+    "skill": {
+      "*": "allow",
+      "internal-*": "deny",
+      "experimental-*": "ask"
+    }
+  }
+}</code></pre>
+
+    <table>
+      <thead>
+        <tr><th>Valor</th><th>Comportamiento</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="inline-code">allow</code></td><td>El skill se carga automaticamente sin preguntar</td></tr>
+        <tr><td><code class="inline-code">deny</code></td><td>El skill nunca se carga</td></tr>
+        <tr><td><code class="inline-code">ask</code></td><td>El agente pregunta antes de cargar el skill</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BUENAS PRACTICAS -->
+  <div class="section">
+    <h2>Buenas Practicas</h2>
+    <div class="grid">
+      <div class="card">
+        <h4>Una responsabilidad</h4>
+        <p>Cada skill debe hacer una cosa bien. No mezcles generacion de tests con revision de codigo.</p>
+      </div>
+      <div class="card">
+        <h4>Descripcion especifica</h4>
+        <p>Incluye palabras clave que el agente pueda detectar. "Genera tests para TypeScript" es mejor que "ayuda con codigo".</p>
+      </div>
+      <div class="card">
+        <h4>Instrucciones concretas</h4>
+        <p>Mientras mas detallado el SKILL.md, mejores resultados. Incluye ejemplos concretos.</p>
+      </div>
+      <div class="card">
+        <h4>Versiona tus skills</h4>
+        <p>Usa el campo <code class="inline-code">version</code> en frontmatter y commitea los skills al repositorio.</p>
+      </div>
+      <div class="card">
+        <h4>Alcance correcto</h4>
+        <p>Skills de workflow van globales (<code class="inline-code">~/.config/</code>). Skills de arquitectura van en el proyecto (<code class="inline-code">.opencode/</code>).</p>
+      </div>
+      <div class="card">
+        <h4>Prueba incrementalmente</h4>
+        <p>Empieza simple, agrega complejidad gradualmente. No intentes hacer todo de golpe.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMANDS VS SKILLS -->
+  <div class="section">
+    <h2>Commands vs Skills vs Agents</h2>
+    <table>
+      <thead>
+        <tr><th>Extension</th><th>Se activa con</th><th>Ubicacion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Custom Commands</td><td>Usuario escribe <code class="inline-code">/comando</code></td><td><code class="inline-code">.opencode/commands/*.md</code></td></tr>
+        <tr><td>Agent Skills</td><td>Modelo detecta por descripcion</td><td><code class="inline-code">.opencode/skills/</code></td></tr>
+        <tr><td>Custom Agents</td><td><code class="inline-code">Tab</code> o <code class="inline-code">@agente</code></td><td><code class="inline-code">.opencode/agents/*.md</code></td></tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      <strong>Regla simple:</strong> Commands son invocados por el usuario. Skills son descubiertos por el modelo. Agents son entidades independientes con su propia personalidad.
+    </div>
+  </div>
+
+  <!-- RECURSOS -->
+  <div class="section">
+    <h2>Recursos</h2>
+    <div class="grid">
+      <div class="card">
+        <h4>Documentacion oficial</h4>
+        <p><a href="https://opencode.ai/docs/skills/" style="color:var(--accent)">opencode.ai/docs/skills</a></p>
+      </div>
+      <div class="card">
+        <h4>Estandar Agent Skills</h4>
+        <p><a href="https://agentskills.io" style="color:var(--accent)">agentskills.io</a></p>
+      </div>
+      <div class="card">
+        <h4>Directorio de Skills</h4>
+        <p><a href="https://skills.sh" style="color:var(--accent)">skills.sh</a></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Generado con OpenCode Skills &mdash; <a href="https://opencode.ai">opencode.ai</a>
+</footer>
+
+</body>
+</html>
